@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMob-Mechanic - Services</title>
+    <link rel="stylesheet" href="ServicesPage.css">
+</head>
+<body>
+    <nav id="navbar"></nav>
+    <h2>Our Services</h2>
+    <div class="services-offered">
+        <div class="preventive-maintenance">
+            <img src="mechanical.png" class = "mechanical-image1">
+            <h3 class="preventive-maintenance-title">Preventive Maintenance</h3>
+            <button onclick="location.assign('PreventiveMaintenanceService.html')" 
+            class="preventive-maintenance-button">More Details</button>
+        </div>
+        <div class="body-repair">
+            <img src="mechanical.png" class = "mechanical-image2">
+            <h3 class="body-repair-title">Body Repair</h3>
+            <button onclick="location.assign('BodyRepairService.html')" 
+            class="body-repair-button">More Details</button>
+        </div>
+        <div class="Car-care">
+            <img src="mechanical.png" class = "mechanical-image3">
+            <h3 class="Car-care-title">Car Care</h3>
+            <button onclick="location.assign('CarCareService.html')" class="Car-care-button">More Details</button>
+        </div>
+    </div>
+    <div id="countdown"></div>
+
+    <script>
+        const user = sessionStorage.getItem('user');
+        const navbar = document.getElementById('navbar');
+
+        if (user) {
+            const userObj = JSON.parse(user);
+            navbar.innerHTML = `
+                <a href="HomePage.html">Home</a>
+                <a href="ServicesPage.html">Services</a>
+                <a href="BookingPage.html">Book Service</a>
+                <a href="#" onclick="logout()">Logout</a>
+                <span>Welcome, ${userObj.username}</span>
+            `;
+        } else {
+            navbar.innerHTML = `
+                <a href="HomePage.html">Home</a>
+                <a href="LoginPage.html">Login</a>
+            `;
+        }
+
+        function logout() {
+            alert('Logged out successfully');
+            sessionStorage.clear();
+            location.assign('HomePage.html');
+        }
+
+        // Countdown timer
+        let countdownTime = 1 * 60;
+        const countdownElement = document.getElementById('countdown');
+
+        setInterval(() => {
+            const minutes = Math.floor(countdownTime / 60);
+            const seconds = countdownTime % 60;
+            countdownElement.innerText = `Offer expires in: ${minutes}m ${seconds}s`;
+            countdownTime--;
+
+            if (countdownTime < 0) {
+                countdownElement.innerText = 'Offer expired :(';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="BookingPage.css">
+</head>
+<body>
+    <nav id="navbar"></nav>
+    <h2>Book a Service</h2>
+    <form id="booking-form" action="BookingSuccess.html" method="POST">
+        <label for="customer-name">Name:</label>
+        <input type="text" id="customer-name" class="customer-name" required><br>
+        <label for="service">Select Service:</label>
+        <select id="service" class="service">
+            <option value="Preventive Maintenance Service">Preventive Maintenance Service</option>
+            <option value="Body Repair Service">Body Repair Service</option>
+            <option value="Car Care Service">Car Care Service</option>
+        </select><br>
+        <label for="appointment-date">Appointment Date:</label>
+        <input type="date" id="appointment-date" class="appointment-date" required><br>
+        <button type="submit" class="book">Book</button>
+    </form>
+    <div id="error-message" class="error-message"></div>
+
+    <script>
+        const user = sessionStorage.getItem('user');
+        const navbar = document.getElementById('navbar');
+
+        if (user) {
+            const userObj = JSON.parse(user);
+            navbar.innerHTML = `
+                <a href="HomePage.html">Home</a>
+                <a href="ServicesPage.html">Services</a>
+                <a href="BookingPage.html">Book Service</a>
+                <a href="#" onclick="logout()">Logout</a>
+                <span>Welcome, ${userObj.username}</span>
+            `;
+        } else {
+            navbar.innerHTML = `
+                <a href="HomePage.html">Home</a>
+                <a href="LoginPage.html">Login</a>
+            `;
+        }
+
+        function logout() {
+            alert('Logged out successfully');
+            sessionStorage.clear();
+            location.assign('HomePage.html');
+        }
+
+        const selectedService = localStorage.getItem('selectedService');
+        if (selectedService) {
+            document.getElementById('service').value = selectedService;
+            localStorage.removeItem('selectedService');
+        }
+
+        document.getElementById('appointment-date').oninput = function() {
+            const appointmentDate = new Date(this.value);
+            const currentDate = new Date();
+            if (appointmentDate < currentDate) {
+                document.getElementById('error-message').innerText = 'Appointment date cannot be in the past !';
+            } else {
+                document.getElementById('error-message').innerText = '';
+            }
+        };
+
+        document.getElementById('booking-form').onsubmit = function(event) {
+            event.preventDefault();
+            const appointmentDate = new Date(document.getElementById('appointment-date').value);
+            const currentDate = new Date();
+            if (appointmentDate < currentDate) {
+                document.getElementById('error-message').innerText = 'Appointment date cannot be in the past';
+            } else {
+                localStorage.setItem('booking', JSON.stringify({
+                    customer: document.getElementById('customer-name').value,
+                    service: document.getElementById('service').value,
+                    date: document.getElementById('appointment-date').value
+                }));
+                location.assign('BookingSuccess.html');
+            }
+        };
+    </script>
+</body>
+</html>

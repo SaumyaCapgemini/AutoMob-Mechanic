@@ -1,0 +1,19 @@
+[
+    {
+        "customer": "John Doe",
+        "service": "Preventive Maintenance Service",
+        "date": "2024-05-30"
+    },
+    {
+        "customer": "Jane Smith",
+        "service": "Body Repair Service",
+        "date": "2024-06-15"
+    },
+    {
+        "customer": "Saumya Reddy",
+        "service": "Car Care Service",
+        "date": "2024-05-28"  
+    }
+]
+
+

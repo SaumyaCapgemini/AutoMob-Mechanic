@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    flex-direction: row;
+}
+body h2{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 20px 0 0 520px;
+    font-size: 35px;
+}
+
+h3{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  /* margin: 30px 0 0 30px; */
+}
+button{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 100px;
+    height:30px;
+    /*margin:20px 0 0 30px; */
+        cursor: pointer;
+}
+
+nav {
+    background-color: #FCFF6C;
+    overflow: hidden;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    padding: 14px 20px;
+    display: inline-block;
+}
+
+nav a:hover {
+    background-color: #FFFDB5;
+    border-radius: 4px;
+}
+
+nav span {
+    color: black;
+    margin-left: auto;
+}
+
+#countdown{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin:100px 0 0 100px;
+    color:red;
+}
+.mechanical-image1{
+    width:50px;
+    height:50px;
+    margin: 100px 0 0 150px;
+    
+}
+.preventive-maintenance-title{
+    margin: 30px 0 0 60px;
+    
+}
+.preventive-maintenance-button{
+    margin: 30px 0 0 120px;
+}
+.mechanical-image2{
+    width:50px;
+    height:50px;
+    margin: 100px 0 0 330px;    
+}
+.body-repair-title{
+    margin: 30px 0 0 300px;
+
+}
+.body-repair-button{
+    margin: 30px 0 0 310px;
+}
+.mechanical-image3{
+    width:50px;
+    height:50px;
+    margin: 100px 0 0 400px; 
+}
+.Car-care-title{
+    margin: 30px 0 0 390px;
+
+}
+.Car-care-button{
+    margin: 30px 0 0 380px;
+}
+.services-offered{
+ display: flex;
+ flex-direction: row;
+}

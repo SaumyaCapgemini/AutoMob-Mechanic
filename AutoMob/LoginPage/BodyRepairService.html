@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Repair Service</title>
+    <link rel="stylesheet" href="BodyRepairService.css">
+</head>
+<body>
+    <nav id="navbar"></nav>
+    <h2>Body Repair Service</h2>
+    <p>Details about the body repair service...</p>
+    <button onclick="bookService('Body Repair Service')">Book Service</button>
+    <button onclick="history.back()">Go Back</button>
+
+    <script>
+        const user = sessionStorage.getItem('user');
+        const navbar = document.getElementById('navbar');
+
+        if (user) {
+            const userObj = JSON.parse(user);
+            navbar.innerHTML = `
+                <a href="HomePage.html">Home</a>
+                <a href="ServicesPage.html">Services</a>
+                <a href="BookingPage.html">Book Service</a>
+                <a href="#" onclick="logout()">Logout</a>
+                <span>Welcome, ${userObj.username}</span>
+            `;
+        } else {
+            navbar.innerHTML = `
+                <a href="HomePage.html">Home</a>
+                <a href="LoginPage.html">Login</a>
+            `;
+        }
+
+        function logout() {
+            alert('Logged out successfully');
+            sessionStorage.clear();
+            location.assign('HomePage.html');
+        }
+
+        function bookService(service) {
+            localStorage.setItem('selectedService', service);
+            location.assign('BookingPage.html');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMob-Mechanic - Reports</title>
+    <link rel="stylesheet" href="ReportsPage.css">
+</head>
+<body>
+    <nav id="navbar"></nav>
+    <h2>Booking Reports</h2>
+    <div id="reports"></div>
+
+    <script>
+        const user = sessionStorage.getItem('user');
+
+        if (user) {
+            const userObj = JSON.parse(user);
+            if (userObj.role === 'admin') {
+                document.getElementById('navbar').innerHTML = `
+                    <a href="HomePage.html">Home</a>
+                    <a href="ReportsPage.html">Reports</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                `;
+
+                // const data = {
+                //     name : "John",
+                //     age: 23
+                // };
+                // Fetch and display booking information
+                // Assume we have a JSON file booking.json with booking data
+                fetch('booking.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const reportsDiv = document.getElementById('reports');
+                        data.forEach(booking => {
+                            const bookingInfo = document.createElement('div');
+                            bookingInfo.innerText = `Customer: ${booking.customer}, Service: ${booking.service}, Date: ${booking.date}`;
+                            reportsDiv.appendChild(bookingInfo);
+                        });
+                    });
+                    console.log(booking.customer);
+            //     fetch("http://127.0.0.1:5500/Components/LoginPage/BookingPage.html",{
+            //         method: "POST",
+            //         body: JSON.stringify({
+            //             userID: 1, 
+            //             title: "Saumya Reddy",
+            //             completed: false
+            //         }),
+            //         headers:{
+            //             "Content-type": "booking/json; charset=UTF-8"
+            //         }
+            //     })
+            //     .then((response) => response.json())
+            //    .then((json) => console.log(json));
+
+            } else {
+                alert('Access denied');
+                location.assign('HomePage.html');
+            }
+        } else {
+            alert('Please login as admin');
+            location.assign('LoginPage.html');
+        }
+
+        function logout() {
+            alert('Logged out successfully');
+            sessionStorage.clear();
+            location.assign('HomePage.html');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMob-Mechanic - Login</title>
+    <link rel="stylesheet" href="LoginPage.css">
+</head>
+<body>
+    <div class="title">
+        <h3>Automob-Mechanic</h3>
+    </div>
+  <div class="login--form">
+    <h2>Login</h2>
+    <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" class="username" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" class="password" required><br>
+        <button type="submit" class="submit">Login</button>
+    </form>
+  </div>
+    <div id="login-message" class="login-message"></div>
+
+    <script>
+        document.getElementById('login-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('users.json');
+            const users = await response.json();
+
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                sessionStorage.setItem('user', JSON.stringify(user));
+                location.assign('HomePage.html');
+            } else {
+                document.getElementById('login-message').innerText = 'Invalid username or password';
+            }
+        };
+    </script>
+</body>
+</html>

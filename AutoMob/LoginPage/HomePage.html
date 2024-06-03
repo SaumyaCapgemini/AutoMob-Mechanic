@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMob-Mechanic - Home</title>
+    <link rel="stylesheet" href="HomePage.css">
+</head>
+<body>
+    <nav id="navbar"></nav>
+    <h1>Welcome to Automob-Mechanic !</h1>
+    <h2>Car repair at your door step</h2>
+    <p>Your one-stop solution for automobile repair and maintenance services.</p>
+    <div class="our--partners">
+        
+    </div>
+    <button id="explore-more">Explore More</button>
+
+    <script>
+        document.getElementById('explore-more').onclick = function() {
+            location.assign('ServicesPage.html');
+        };
+
+        const user = sessionStorage.getItem('user');
+        const navbar = document.getElementById('navbar');
+
+        if (user) {
+            const userObj = JSON.parse(user);
+            if (userObj.role === 'admin') {
+                navbar.innerHTML = `
+                    <a href="HomePage.html">Home</a>
+                    <a href="ReportsPage.html">Reports</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                `;
+            } else {
+                navbar.innerHTML = `
+                    <a href="HomePage.html">Home</a>
+                    <a href="ServicesPage.html">Services</a>
+                    <a href="BookingPage.html">Book Service</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                    <span>Welcome, ${userObj.username}</span>
+                `;
+            }
+        } else {
+            navbar.innerHTML = `
+                <a href="HomePage.html">Home</a>
+                <a href="LoginPage.html">Login</a>
+            `;
+        }
+
+        function logout() {
+            alert('Logged out successfully');
+            sessionStorage.clear();
+            location.assign('HomePage.html');
+        }
+    </script>
+</body>
+</html>
